@@ -2,7 +2,8 @@
 
 ## Analyzing the business value
 Verificar primeiro se o valor de negócio está sendo entregue, ou seja, se o [teste funcional](http://softwaretestingfundamentals.com/functional-testing/) é aprovado.
-Once the feature achieves the business goal, and observable behavior is tested, we have time for refactoring. Otherwise the feature can be checked in and technical debt can be registered as a new task.
+
+O ponto aqui é que se temos a funcionalidade entregando a feature esperada, podemos avaliar se temos tempo para refactoring. Caso contrário podemos assumir o débito técnico e cadastrar uma nova task no gerenciador de tarefas.
 
 Don’t perform manual tests, ensure functional tests instead.
 Pros:
