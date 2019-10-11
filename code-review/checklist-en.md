@@ -32,13 +32,15 @@ What to consider:
 
 ## Analyzing code quality and classes design
 <details>
-  <summary>Meaningful names</summary>
+  <summary>Meaningful names [Nomes significativos]</summary>
   
-  - [ ] Are names intention-revealing?
-  - [ ] Variable examples: elapsedTimeInDays, daysSinceCreation, daysSinceModification, fileAgeInDays
-  - [ ] Do not append the variable’s type to the variable name
-  - [ ] Spelling similar concepts similarly is information. Using inconsistent spellings is disinformation
-  - [ ] Small name -> Small scope
+  - [ ] Os nomes escolhidos para variáveis, métodos, classes, etc; expressam realmente seu significado?
+    - Exemplos de nomes de variáveis: `elapsedTimeInDays`, `daysSinceCreation`, `daysSinceModification`, `fileAgeInDays`;
+  - [ ] Não faça append do tipo da variável ao seu nome. Ex: `shoppingCartItemsList`;
+  - [ ] Consistência ao escolher nomes que tem conceitos similares;
+  - [ ] Consistência ao, escolher nomes que tem conceitos similares
+  - [ ] O tamanho do nome da variável deve corresponder ao seu escopo. Nome curto -> Escopo curto;
+  - [ ] Consistência ao, escolher nomes que tem conceitos similares
   - [ ] Are there magic numbers? Extract constants
   - [ ] Pronounceable and searchable names
   - [ ] Unencoded interfaces. IShapeFactory -> ShapeFactory. Then concrete classes: ShapeFactoryImp
