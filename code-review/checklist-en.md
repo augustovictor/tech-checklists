@@ -245,3 +245,41 @@ What to consider:
 </details>
 
 ---
+
+## Avaliando o design de código e projeto de classes
+
+### Consistência e objetos
+
+---
+
+### Encapsulamento e propagação de mudanças
+
+---
+
+### SRP - Coesão
+
+---
+
+### OCP - Acoplamento
+
+---
+
+### LSP - Herança e Composição
+
+---
+
+### ISP - Interfaces
+
+---
+
+## Avaliando smells arquiteturais da aplicação
+
+---
+
+## Avaliando o uso do Kotlin
+
+---
+
+## Avaliando os testes
+
+### Regras de negócio (happy path X edge cases)
