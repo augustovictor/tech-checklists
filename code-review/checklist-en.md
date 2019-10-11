@@ -32,7 +32,7 @@ What to consider:
 
 ## Analyzing code quality and classes design
 <details>
-  <summary>Meaningful names [Nomes significativos]</summary>
+  <summary>Meaningful names</summary>
   
   - [ ] Os nomes escolhidos para variáveis, métodos, classes, etc; expressam realmente seu significado?
     - Exemplos de nomes de variáveis: `elapsedTimeInDays`, `daysSinceCreation`, `daysSinceModification`, `fileAgeInDays`;
@@ -45,11 +45,11 @@ What to consider:
   - [ ] Utilize nomes pronunciáveis e que sejam possíveis de serem procurados. Nada de `xbhqService`;
   - [ ] Utilize unencoded interfaces. `IShapeFactory` -> `ShapeFactory`, e então nas classes concrertas: `ShapeFactoryImp`;
   - [ ] Classes devem ser nomeadas com substantivos ou frases. Ex: `Customer`, `WikiPage`, `Account`, `AddressParser`. Evite nomes como `Manager`, `Processor`, or `Info`. O nome de uma classe não deve ser um verbo.
-  - [ ] For constructor overload use factory method
-  - [ ] Methods should have verbs
-  - [ ] One word per concept. Don’t mix fetch, get, retrieve. Or add, create, increase. For the same concept.
-  - [ ] Use computer science terms, algorithm names, pattern names, etc. Programmers will be reading the code
-  - [ ] Add meaningful context. A variable named state does not give any context when received as a parameter. However if its name is addrState you’d know it it’s part of an address.
+  - [ ] Para `constructor overload` use um `factory method`;
+  - [ ] Métodos devem ser nomeados como verbos;
+  - [ ] Escolha uma palavra por conceito. Não misture `fetch`, `get`, `retrieve`; ou `add`, `create`, `increase`;
+  - [ ] Faça uso dos termos da computação, nomes de algorítmos, nomes de patterns, etc. São pessoas familiarizadas com desenvolvimento de software que lerão o código. Não se preocupe :);
+  - [ ] Adicione contexto ao escolher nomes. A variável `state` não provê contexto algum quando recebida sozinha como parâmetro, mas se o noem dela é `addrState`e conseguimos deduzir que ela é parte de um endereço.
 </details>
 
 ---
