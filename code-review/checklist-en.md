@@ -41,10 +41,10 @@ What to consider:
   - [ ] Consistência ao, escolher nomes que tem conceitos similares
   - [ ] O tamanho do nome da variável deve corresponder ao seu escopo. Nome curto -> Escopo curto;
   - [ ] Consistência ao, escolher nomes que tem conceitos similares
-  - [ ] Are there magic numbers? Extract constants
-  - [ ] Pronounceable and searchable names
-  - [ ] Unencoded interfaces. IShapeFactory -> ShapeFactory. Then concrete classes: ShapeFactoryImp
-  - [ ] Classes should have nouns. Customer, WikiPage, Account, AddressParser. No Manager, Processor, or Info. Classes should not be verbs
+  - [ ] Existem valores mágicos pelo código? Extraia constantes para tais situações;
+  - [ ] Utilize nomes pronunciáveis e que sejam possíveis de serem procurados. Nada de `xbhqService`;
+  - [ ] Utilize unencoded interfaces. `IShapeFactory` -> `ShapeFactory`, e então nas classes concrertas: `ShapeFactoryImp`;
+  - [ ] Classes devem ser nomeadas com substantivos ou frases. Ex: `Customer`, `WikiPage`, `Account`, `AddressParser`. Evite nomes como `Manager`, `Processor`, or `Info`. O nome de uma classe não deve ser um verbo.
   - [ ] For constructor overload use factory method
   - [ ] Methods should have verbs
   - [ ] One word per concept. Don’t mix fetch, get, retrieve. Or add, create, increase. For the same concept.
