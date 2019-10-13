@@ -24,13 +24,13 @@ What to consider:
 
 ---
 
-## Assumptions:
-- A premature decision is a decision made with suboptimal knowledge
-- To write clean code, you must first write dirty code and then clean it
+## Consideraçes iniciais:
+- Uma decisão prematura é feita com um conhecimento limitado e sub-ótimo;
+- Para escrever clean code, devemos primeiro escrever código ruim, e então refatorar;
 
 ---
 
-## Analyzing code quality and classes design
+## Analizando a qualidade do código e o design de classes
 <details>
   <summary>Meaningful names</summary>
   
@@ -57,25 +57,27 @@ What to consider:
 <details>
   <summary>Functions</summary>
   
-  - [ ] Should be small
-  - [ ] Should have one level of abstraction only so readers may tell whether a particular expression is an essential concept or a detail.
-  - [ ] `If` statements should always be positive
-  - [ ] Reading Code from Top to Bottom: The Stepdown Rule
-  - [ ] We want the code to read like a top-down narrative. We want every function to be followed by those at the next level of abstraction so that we can read the program, descending one level of abstraction at a time as we read down the list of functions.
-  - [ ] To say this differently, we want to be able to read the program as though it were a set of TO paragraphs, each of which is describing the current level of abstraction and referencing subsequent TO paragraphs at the next level down.
+  - [ ] Devem ser pequenas
+  - [ ] Devem ter apenas um nível de abstração, de forma que possa-se entender se ela é um conceito essencial ou apenas um detalhe;
+  - [ ] `If` statements devem sempre estar na forma positiva;
+  - [ ] O código deve ser lido de cima para baixo: Stepdown Rule
+  - [ ] O código deve ser lido como uma narrativa, onde cada função é sucedida por uma com seu próximo nível de abstração;
+    - To say this differently, we want to be able to read the program as though it were a set of TO paragraphs, each of which is describing the current level of abstraction and referencing subsequent TO paragraphs at the next level down.
   - [ ] To include the setups and teardowns, we include setups, then we include the test page content, and then we include the teardowns.
   - [ ] To include the setups, we include the suite setup if this is a suite, then we include the regular setup.
   - [ ] To include the suite setup, we search the parent hierarchy for the “SuiteSetUp” page and add an include statement with the path of that page.
   - [ ] To search the parent. . .
-  - [ ] Number of arguments:
-  - [ ] zero (niladic)
-  - [ ] one (monadic)
-  - [ ] two (dyadic)
-  - [ ] Three arguments (triadic) should be avoided where possible
+  
+  ### Number of arguments:
+  
+  - [ ] Zero (niladic);
+  - [ ] Um (monadic;
+  - [ ] Dois (dyadic);
+  - [ ] Três arguments (triadic) deve ser evitado sempre que possível;
   - [ ] More than three (polyadic) requires very special justification—and then shouldn’t be used anyway.
   - [ ] Don’t use output parameters (parameters that suffer changes within the function they are passed in)
-  - [ ] No flag arguments
-  - [ ] Functions should have no side effect
+  - [ ] Não utilize parâmetros como flag
+  - [ ] Funções não devem ter efeitos colaterais;
   - [ ] Watch out for temporal coupling (When there is a right moment to call a function, otherwise it would not work)
   - [ ] If a function must change the state of something, have it change the state of its own object
   - [ ] We should not have to check the function signature to understand what it does.
@@ -83,7 +85,7 @@ What to consider:
   - [ ] Say we have a function to set a value to an attribute and return true if it succeeds. In our program it would be wrapped in an if condition. However we would not tell whether we’re checking the attribute was previously set then we do something (work as an adjective). Or if we can assign a value successfully (work as a verb). A solution to that is to separate the verification(Query) from the assignment(Command). And wrap the command inside an if statement verifying the Query in our program.
   - [ ] It's better to throw exceptions than returning error codes. By returning error codes we obligate the caller to handle the error immediately. Also it leads to many ‘if’ statements inside the command body.
   - [ ] By using exceptions we can, in our program, wrap the statement with a try catch block and handle error separately.
-  - [ ] Extract the content of try catch blocks to functions.
+  - [ ] Extraia para funções o conteúdo de tryCatch blocks;
 </details>
 
 ---
@@ -91,8 +93,8 @@ What to consider:
 <details>
   <summary>Formatting</summary>
 
-  - [ ] Place closely related concepts.
-  - [ ] Use empty lines to separate context
+  - [ ] Posicione de forma próxima conceitos relacionados;
+  - [ ] Utilize linhas em branco para separar contexto;
 </details>
 
 ---
