@@ -63,28 +63,28 @@ What to consider:
   - [ ] O código deve ser lido de cima para baixo: Stepdown Rule
   - [ ] O código deve ser lido como uma narrativa, onde cada função é sucedida por uma com seu próximo nível de abstração;
     - To say this differently, we want to be able to read the program as though it were a set of TO paragraphs, each of which is describing the current level of abstraction and referencing subsequent TO paragraphs at the next level down.
-  - [ ] To include the setups and teardowns, we include setups, then we include the test page content, and then we include the teardowns.
-  - [ ] To include the setups, we include the suite setup if this is a suite, then we include the regular setup.
-  - [ ] To include the suite setup, we search the parent hierarchy for the “SuiteSetUp” page and add an include statement with the path of that page.
-  - [ ] To search the parent. . .
+    - To include the setups and teardowns, we include setups, then we include the test page content, and then we include the teardowns.
+    - To include the setups, we include the suite setup if this is a suite, then we include the regular setup.
+    - To include the suite setup, we search the parent hierarchy for the “SuiteSetUp” page and add an include statement with the path of that page.
+    - To search the parent. . .
   
   ### Number of arguments:
   
   - [ ] Zero (niladic);
   - [ ] Um (monadic;
   - [ ] Dois (dyadic);
-  - [ ] Três arguments (triadic) deve ser evitado sempre que possível;
-  - [ ] More than three (polyadic) requires very special justification—and then shouldn’t be used anyway.
-  - [ ] Don’t use output parameters (parameters that suffer changes within the function they are passed in)
+  - [ ] Três argumentos (triadic) deve ser evitado sempre que possível;
+  - [ ] Mais do que 3 (polyadic) - Requer uma boa justificativa, pois não deve ser usado;
+  - [ ] Não use parâmetros `output` (Parâmetros que sofrem modificações dentro do método no qual é passado);
   - [ ] Não utilize parâmetros como flag
   - [ ] Funções não devem ter efeitos colaterais;
-  - [ ] Watch out for temporal coupling (When there is a right moment to call a function, otherwise it would not work)
-  - [ ] If a function must change the state of something, have it change the state of its own object
-  - [ ] We should not have to check the function signature to understand what it does.
-  - [ ] Command Query Separation: Functions should either do something or answer something. Not both.
-  - [ ] Say we have a function to set a value to an attribute and return true if it succeeds. In our program it would be wrapped in an if condition. However we would not tell whether we’re checking the attribute was previously set then we do something (work as an adjective). Or if we can assign a value successfully (work as a verb). A solution to that is to separate the verification(Query) from the assignment(Command). And wrap the command inside an if statement verifying the Query in our program.
-  - [ ] It's better to throw exceptions than returning error codes. By returning error codes we obligate the caller to handle the error immediately. Also it leads to many ‘if’ statements inside the command body.
-  - [ ] By using exceptions we can, in our program, wrap the statement with a try catch block and handle error separately.
+  - [ ] Observe acoplamento temporal (Quando existe um momento certo para chamar uma função, caso contrário ela não irá funcionar);
+  - [ ] Se uma função precisa alterar o estado de algo, que seja do próprio objeto que está a invocando;
+  - [ ] Não devemos ter que ler a assinatura de uma função para entender o que ela faz. O próprio nome deve deixar isso descrito;
+  - [ ] Command Query Separation: Funções devem executar algo OU retornar algo. Não os dois;
+    - Say we have a function to set a value to an attribute and return true if it succeeds. In our program it would be wrapped in an if condition. However we would not tell whether we’re checking the attribute was previously set then we do something (work as an adjective). Or if we can assign a value successfully (work as a verb). A solution to that is to separate the verification(Query) from the assignment(Command). And wrap the command inside an if statement verifying the Query in our program.
+  - [ ] É melhor lançar exceptions do que retornar códigos de erro. Ao retornar um código de erro nós obrigamos o client a tratar o erro imediatamente (programação defensiva);
+    - Ao fazer uso de exceptions podemos fazer um wrap na classe client da nossa função, e separar a execução do cenário esperado do momento de tratamento de erro;
   - [ ] Extraia para funções o conteúdo de tryCatch blocks;
 </details>
 
