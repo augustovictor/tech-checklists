@@ -234,21 +234,20 @@ O que considerar:
 - [ ] Duplication. Find and eliminate duplication wherever you can
 - [ ] Vertical separation
 - [ ] Inconsistency. If you do something a certain way, do all similar things in the same way. This goes back to the principle of least surprise.
-- [ ] Structure over Convention
+- [ ] Adote Structure over Convention;
 - [ ] Enforce design decisions with structure over convention. Naming conventions are good, but they are inferior to structures that force compliance. For example, switch/cases with nicely named enumerations are inferior to base classes with abstract methods. No one is forced to implement the switch/case statement the same way each time; but the base classes do enforce that concrete classes have all abstract methods implemented.
-- [ ] Encapsulate conditionals
+- [ ] Encapsule condicionais;
 - [ ] Don’t Be Arbitrary. Have a reason for the way you structure your code, and make sure that reason is communicated by the structure of the code
 ### Names
 - [ ] Choose Names at the Appropriate Level of Abstraction. Don’t pick names that communicate implementation; choose names the reflect the level of abstraction of the class or function you are working in.
-- [ ] Use Long Names for Long Scopes
-- [ ] Names Should Describe Side-Effects. Ex: getFormattedValueOrEmpty
+- [ ] Use nomes longos para escopos longos de código;
+- [ ] Nomes devem deixar de forma explícita. Ex: getFormattedValueOrEmpty
 ### Tests
-- [ ] Use a Coverage Tool!
-- [ ] Don’t Skip Trivial Tests
-- [ ] An Ignored Test Is a Question about an Ambiguity
-- [ ] Test Boundary Conditions
-- [ ] Exhaustively Test Near Bugs
-- [ ] Bugs tend to congregate. When you find a bug in a function, it is wise to do an exhaustive test of that function. You’ll probably find that the bug was not alone
+- [ ] Use alguma ferramenta de code coverage
+- [ ] Não deixe de implementar testes triviais
+- [ ] Um teste ignorado é um ponto de dúvida
+- [ ] Teste edge cases
+- [ ] Quando encontrar um bug em alguma função, teste-a de forma exaustiva. Bugs tendem a se aglomerar. Provavelmente você irá encontrar algum outro bug;
 </details>
 
 ---
