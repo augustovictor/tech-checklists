@@ -114,10 +114,9 @@ What to consider:
 <details>
   <summary>Error Handling</summary>
 
-  - [ ] Use unchecked exceptions. The main difference between checked and unchecked exception is that the checked exceptions are checked at compile-time while unchecked exceptions are checked at runtime.
-  - [ ] Provide context with exceptions so we can track down where it came from
-  - [ ] SPECIAL CASE PATTERN [Fowler].
-  - [ ] Don’t Return Null, return special case types
+  - [ ] Use `unchecked exceptions`. A principal diferença é que as `unchecked exceptions` são verificadas em tempo de execução, e não em tempo de compilação como as `checked exceptions`;
+  - [ ] Forneça contexto nas exceptions para que seja possível saber exatamente de onde saiu;
+  - [ ] Não retorne `null`, faça uso do SPECIAL CASE PATTERN [Fowler];
 </details>
 
 ---
@@ -125,10 +124,9 @@ What to consider:
 <details>
   <summary>Boundaries</summary>
 
-  - [ ] Learning tests: Tests to learn a new package/lib/api
-  - [ ] Using code that does not exist yet:
-  - [ ] Create an interface to represent that code, then create an implementation adapter to use the actual implementation, and also a fake implementation to use in tests.
-  - [ ] See more about seams in [WELC]
+  - [ ] Quando estiver estudando algum package, lib, ou api, escreva testes. Dessa forma você não só aprende como é o funcionamento mas também deixa a documentação para outras pessoas;
+  - [ ] Quando precisar fazer uso de código que ainda não existe, crie uma interface para representar o código, e então crie um adapter para usar a real implementação posteriormente, e também poder criar uma implementação fake para os testes;
+    - See more about seams in [WELC]
 </details>
 
 ---
