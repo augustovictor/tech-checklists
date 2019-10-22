@@ -5,7 +5,7 @@ Verificar primeiro se o valor de negócio está sendo entregue, ou seja, se o [t
 
 O ponto aqui é que se temos a funcionalidade entregando a feature esperada, podemos avaliar se temos tempo para refactoring. Caso contrário podemos assumir o débito técnico e cadastrar uma nova task no gerenciador de tarefas.
 
-Don’t perform manual tests, ensure functional tests instead.
+Não execute testes manuais, garanta testes automatizados.
 Pros:
 * No time is spent creating a script for how to setup the environment for the test
 * No time is spent performing the manual test
@@ -14,13 +14,14 @@ Cons:
 * The reviewer should have a good technical background and a complete understanding of what is required from business so they analyze whether the test covers the proper scenarios.
 * No room for exploratory tests (Input change, or request method change, etc)
 
-What to consider:
-* Verify if the functional test covers the happy path
-* Mocks should specify attributes under test instead of use default values
-* Assert attribute values under test
-* Verify if the functional test does not cause side effects (Changes what should not be changed)
-* Verify if edge cases are covered by unit tests
-* Verify if critical operations are being performed with specific values. Eg: Audit event, database events, integration calls, etc.
+O que considerar:
+* Verifique se o teste de integração cobre o `happy path`;
+* Garanta que não há mais de um teste de integração cobrindo o mesmo cenário;
+* Caso o teste faça uso de `Mocks`, especifique os valores para os atributos que farão parte do teste, ao invés de assumir valores default;
+* Faça assert dos valores dos atributos que estão sendo considerados no teste;
+* Verifique se o teste não causa side effects, ou seja, se ele não altera valores que de fato não deveriam ser alterados;
+* Verfique se edge cases estão sendo cobertos por unit tests;
+* Verifique se ações cruciais estão sendo executadas, e com os valores esperados, ao invés de usar o `any()`. Ex: Eventos de auditoria, eventos de banco de dados, chamadas para sistemas de terceiros, etc;
 
 ---
 
