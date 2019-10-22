@@ -83,7 +83,7 @@ What to consider:
   - [ ] Não devemos ter que ler a assinatura de uma função para entender o que ela faz. O próprio nome deve deixar isso descrito;
   - [ ] Command Query Separation: Funções devem executar algo OU retornar algo. Não os dois;
     - Say we have a function to set a value to an attribute and return true if it succeeds. In our program it would be wrapped in an if condition. However we would not tell whether we’re checking the attribute was previously set then we do something (work as an adjective). Or if we can assign a value successfully (work as a verb). A solution to that is to separate the verification(Query) from the assignment(Command). And wrap the command inside an if statement verifying the Query in our program.
-  - [ ] É melhor lançar exceptions do que retornar códigos de erro. Ao retornar um código de erro nós obrigamos o client a tratar o erro imediatamente (programação defensiva);
+  - [ ] É melhor lançar `exceptions` do que retornar códigos de erro. Ao retornar um código de erro nós obrigamos o client a tratar o erro imediatamente (programação defensiva);
     - Ao fazer uso de exceptions podemos fazer um wrap na classe client da nossa função, e separar a execução do cenário esperado do momento de tratamento de erro;
   - [ ] Extraia para funções o conteúdo de tryCatch blocks;
 </details>
@@ -104,9 +104,9 @@ What to consider:
 
   - [ ] Objects hide their data behind abstractions and expose functions that operate on that data. Whereas DataStructures expose their data and have no meaningful functions.
   - [ ] Procedural code (code using data structures) makes it easy to add new functions without changing the existing data structures. OO code, on the other hand, makes it easy to add new classes without changing existing functions. Procedural code makes it hard to add new data structures because all the functions must change. OO code makes it hard to add new functions because all the classes must change.
-  - [ ] (See how to solve)Law of Demeter: a module should not know about the innards of the objects it manipulates. In other words, talk to friends, not to strangers.
-  - [ ] Avoid train wracks: final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();
-  - [ ] It’s better to split in variables
+    - (See how to solve)Law of Demeter: a module should not know about the innards of the objects it manipulates. In other words, talk to friends, not to strangers.
+  - [ ] Evite `train wracks`: `final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();`
+    - É melhor fazer o split em várias variáveis;
 </details>
 
 ---
@@ -172,24 +172,25 @@ What to consider:
   
   #### SRP
   
-  - [ ] We should also be able to write a brief description of the class in about 25 words, without using the words “if,” “and,” “or,” or “but.”
-  - [ ] Class or module should have one, and only one, reason to change
-  - [ ] Do you want your tools organized into toolboxes with many small drawers each containing well-defined and well-labeled components? Or do you want a few drawers that you just toss everything into?
-  - [ ] The goal is to organize it so that a developer knows where to look to find things and need only understand the directly affected complexity at any given time.
-  - [ ] Cohesion
-  - [ ] Classes should have few instance variables. Each of the methods of a class should manipulate one or more of those variables. In general the more variables a method manipulates the more cohesive that method is to its class. A class in which each variable is used by each method is maximally cohesive.
-  - [ ] DIP
-  - [ ] Depend on abstractions, not on details
+  - [ ] Devemos conseguir dar uma breve descrição de uma classe em mais ou menos 25 palavras, sem usar as palavras "se", "e" ou "ou";
+  - [ ] Classes e módulos devem ter apenas UMA razão para mudar. Devem compreender apenas um conceito;
+    - Pense na seguinte analogia: É melhor ter ferramentas separadas em pequenas caixas com labels ou uma grande caixa com tudo dentro?
+  - [ ] O objetivo é organizar classes e módulos de forma que seja fácil encontrar o que se procura, e ter que lidar com a complexidade apenas do que se está tratando no momento;
+  - Cohesion
+  - [ ] Classes devem ter apenas algumas variáveis de instância. Cada um dos seus métodos deve manipular uma ou mais de suas variáveis. Quanto mais variáveis um método manipula, mais coeso ele é em relação à classe;
+  
+  #### DIP
+  - [ ] Dependa de abstrações, não de implementações;
 
 </details>
 
 ---
 
 <details>
-  <summary>Separate where an object is created from where it is used</summary>
+  <summary>Separe o momento de criação dos objetos do momento do seu uso</summary>
 
-  - [ ] ‘Main’ module defines where it is created. It has the Factory Implementation of an abstraction in the Application module
-  - [ ] ‘Application’ module defines where it is used and depends on an abstraction
+  - [ ] O módulo ‘Main’ define onde o objeto é criado. Ele tem a implementação da abstração da `Factory` que esta´no módulo `Application`;
+  - [ ] O módulo ‘Application’ define onde o objeto é usado e depende de uma abstração;
 </details>
 
 ---
@@ -197,10 +198,10 @@ What to consider:
 <details>
   <summary>4 rules of Simple Design. a design is “simple” if it follows these rules</summary>
 
-  - [ ] Runs all the tests
-  - [ ] Contains no duplication
-  - [ ] Expresses the intent of the programmer
-  - [ ] Minimizes the number of classes and methods (lowest priority)
+  - [ ] Execute todos os testes
+  - [ ] O código não contém duplicações (DRY)
+  - [ ] O design expressa as intenções do desenvolvedor
+  - [ ] Minimize a quantidade de classes e métodos (lowest priority)
 </details>
 
 ---
