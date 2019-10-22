@@ -103,9 +103,10 @@ O que considerar:
 <details>
   <summary>Objects and data structures</summary>
 
-  - [ ] Objects hide their data behind abstractions and expose functions that operate on that data. Whereas DataStructures expose their data and have no meaningful functions.
-  - [ ] Procedural code (code using data structures) makes it easy to add new functions without changing the existing data structures. OO code, on the other hand, makes it easy to add new classes without changing existing functions. Procedural code makes it hard to add new data structures because all the functions must change. OO code makes it hard to add new functions because all the classes must change.
-    - (See how to solve)Law of Demeter: a module should not know about the innards of the objects it manipulates. In other words, talk to friends, not to strangers.
+  - Objetos escodem seus atributos atrás de abstrações e expõe funções que operam sobre esses dados. Enquanto que estruturas de dados expõe seus atributos mas não contém funções significativas;
+  - Código procedural (código usando estrutuas de dados) tornam fácil o processo de adicionar novas funções sem alterar as estruturas de dados existentes. Mas torna difícil adicionar novas estruturas de dados, porque todas as funções precisam ser alteradas.
+  - Código OO, ao contrário, torna fácil adicionar novas classes sem alterar as funções já existentes. Mas torna difícil adicionar novas funções, pois todas as classes precisam ser alteradas;
+    - (See how to solve)Lei de Demeter: Um módulo não deve saber sobre os detalhes internos do objeto que ele manipula. Talk to friends, not to strangers
   - [ ] Evite `train wracks`: `final String outputDir = ctxt.getOptions().getScratchDir().getAbsolutePath();`
     - É melhor fazer o split em várias variáveis;
 </details>
