@@ -134,17 +134,18 @@ What to consider:
 <details>
   <summary>Unit tests - Laws of TDD</summary>
 
-  - [ ] First Law You may not write production code until you have written a failing unit test
-  - [ ] Second Law You may not write more of a unit test than is sufficient to fail, and not compiling is failing
-  - [ ] Third Law You may not write more production code than is sufficient to pass the currently failing test
-  - [ ] Single concept per test
-  - [ ] Minimize the number of asserts per concept
-  - [ ] Tests rules
-  - [ ] Fast: Tests should be fast
-  - [ ] Independent: Tests should not depend on each other
-  - [ ] Repeatable: Tests should be repeatable in any environment
-  - [ ] Self-validating: The tests should have a boolean output. Either they pass or fail.
-  - [ ] Timely: The tests need to be written in a timely fashion. Unit tests should be written just before the production code that makes them pass. If you write tests after the production code, then you may find the production code to be hard to test
+  - [ ] A primeira lei é não escrever código de produção até termos um teste falhando para o cenário;
+  - [ ] A segunda lei é que não se deve escrever mais código de teste do que o suficiente para que os testes falhem;
+  - [ ] A terceira lei é não escrever mais código de produção do que o suficiente para os testes passarem;
+  - [ ] Aborde apenas UM conceito por teste;
+  - [ ] Minimize o número de asserts por teste;
+  - Tests rules
+  - [ ] **F**ast: Testes devem ser rápidos;
+  - [ ] **I**ndependent: Testes não devem depender um do outro;
+  - [ ] **R**epeatable: Testes devem poder ser repetidos em qualquer ambiente;
+  - [ ] **S**elf-validating: Testes devem ter um output booleano. Ou passar ou falhar;
+  - [ ] **T**imely: Testes devem ser escritos antes do código de produção, caso contrário pode ser difícil criar os testes;
+    - O TDD faz sentido quando queremos testar classes complexas ou algorítmos. Quando estamos falando de código de infraestrutura, normalmente é um comportamento padrão, em que a forma de escrever a classe não irá mudar dependendo do TDD.
 </details>
 
 ---
@@ -160,15 +161,17 @@ What to consider:
   - [ ] Private utilities called by a public function right after the public function itself
 
   ### Encapsulation
-  - [ ] Hide as much as possible
+  - [ ] Esconda o máximo possível
 
 
   ### Design
-  - [ ] Class size (Count responsibilities)
-  - [ ] The name of a class should describe what responsibilities it fulfills
-  - [ ] If we cannot derive a concise name for a class, then it’s likely too large
-  - [ ] Organize your code for change
-  - [ ] SRP
+  - [ ] Tamanho da classe (Contar quantidade de responsabilidades);
+  - [ ] O nome da classe deve descrever que responsabilidades ela tem;
+  - [ ] Se não é possível criar um nome consiso para uma classe, é provável que ela esteja com muitas responsabilidades;
+  - [ ] Escreva um código que esteja preparado para mudanças;
+  
+  #### SRP
+  
   - [ ] We should also be able to write a brief description of the class in about 25 words, without using the words “if,” “and,” “or,” or “but.”
   - [ ] Class or module should have one, and only one, reason to change
   - [ ] Do you want your tools organized into toolboxes with many small drawers each containing well-defined and well-labeled components? Or do you want a few drawers that you just toss everything into?
@@ -205,12 +208,12 @@ What to consider:
 <details>
   <summary>Smells</summary>
 
-  ### Environment
-    - [ ] Build requires more than one step (single entry point)
-    - [ ] Tests require more than one step
+  ### Smells de Environment
+    - [ ] O build requer mais de um step (no single entry point)
+    - [ ] Os testes requerem mais de um step
   
-  ### Functions
-    - [ ] Too many args
+  ### Smells em Functions
+    - [ ] Muitos argumentos
     - [ ] Output args
     - [ ] Flag args
 </details>
