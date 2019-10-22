@@ -154,15 +154,16 @@ O que considerar:
 <details>
   <summary>Classes</summary>
 
-  ### Structure
-  - [ ] Variables
-  - [ ] Static constants
-  - [ ] Private static variables
-  - [ ] Private instance variables
+  ### A ordem dos elementos em uma classe deve ser:
+  - [ ] Variáveis;
+  - [ ] Constantes estáticas;
+  - [ ] Variáveis estáticas privadas;
+  - [ ] Variáveis de instância privadas;
   - [ ] Private utilities called by a public function right after the public function itself
 
   ### Encapsulation
   - [ ] Esconda o máximo possível
+    - É mais simples deixar um método público caso haja a necessidade do que tornar um método privado, pois seu uso está espalhado pela aplicação;
 
 
   ### Design
