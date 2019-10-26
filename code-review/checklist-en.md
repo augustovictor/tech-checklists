@@ -440,7 +440,7 @@ Item 1: Limit mutability
 Item 2: Minimize the scope of variables
 Item 3: Eliminate platform types as soon as possible. These are types provided by another programming language
 Item 4: Do not expose inferred types. If we assign an inferred type to a generic class, it will have the exact instance type.
-Item 5: [Specify your expectations on arguments and state] (https://gist.github.com/augustovictor/5d2befc9a9782ff5253620bb3eb63e73)
+Item 5: [Specify your expectations on arguments and state](https://gist.github.com/augustovictor/5d2befc9a9782ff5253620bb3eb63e73)
 Item 6: Prefer standard errors to custom ones
 Item 7: Prefer null or Failure result when the lack of result is possible
 Item 8: Handle nulls properly
