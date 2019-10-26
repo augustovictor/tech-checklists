@@ -420,6 +420,289 @@ O que considerar:
 
 ## Avaliando o uso do Kotlin
 
+Definitions
+* A method is a function associated with a class
+    * A function can be:
+        * At top-level (top-level functions)
+        * In a class (member functions)
+        * In a function (local functions)
+* Member is an element defined in a class
+* Extensions are like fake added members to an existing class: they are elements defined outside of a class, but they are called like members
+    * Both members and extensions are associated with a class and so they are both methods
+* The parameter is a variable defined in a function declaration. The argument is the actual value of this variable that gets passed to the function
+* secondary constructor - constructor that calls the primary constructor using 'this' keyword
+
+
+Safety
+Item 1: Limit mutability
+* A class with many mutating points that depend on each other is often really hard to understand and to modify.
+* It requires proper synchronization in multithreaded programs
+Item 2: Minimize the scope of variables
+Item 3: Eliminate platform types as soon as possible. These are types provided by another programming language
+Item 4: Do not expose inferred types. If we assign an inferred type to a generic class, it will have the exact instance type.
+Item 5: [Specify your expectations on arguments and state] (https://gist.github.com/augustovictor/5d2befc9a9782ff5253620bb3eb63e73)
+Item 6: Prefer standard errors to custom ones
+Item 7: Prefer null or Failure result when the lack of result is possible
+Item 8: Handle nulls properly
+* ‘also' and ‘let’ are a better choice for additional operations or handling nullable values
+Item 9: Close resources with use
+Item 10: Write unit tests
+Item 11: Design for readability (Reduce cognitive load)
+Item 12: Operator meaning should be consistent with its function name. Use infix, a function with explicit name, or a top level  function
+Item 13: Avoid returning or operating on `Unit?` The only case the author identified was to use Elvis operator or safe call.
+Item 14: Specify the variable type when it is not clear
+Item 15: Consider referencing receivers explicitly
+Item 16: Properties should represent state, not behavior
+* Kotlin properties != java fields
+* 
+Item 17: Consider naming arguments
+
+Code design
+Reusability
+Item 19: Do not repeat knowledge
+* Logic knowledge - How a program behaves and what it looks like
+* Common algorithms - Implementation of algorithms to achieve expected behavior
+* Only allow repetition when things do not belong to the same context. Ex: Two similar config files for different projects in the same workspace. When wondering whether to keep code separate or abstracted ask yourself: Are they more likely going to change together or separately? If they change together, join them. If not, keep them separate.
+Item 20: Do not repeat common algorithms
+* Know the stdlib
+* DRY
+Item 21: Use property delegation to extract common property patterns
+Item 22: Reuse between different platforms by extracting common modules
+Chapter 4: Abstraction design
+
+Item 23: Each function should be written in terms of a single level of abstraction
+Item 24: Use abstraction to protect code against changes
+* The best way to abstract a concept is to create a class to represent it. This way we decouple from type, and we can hold state. A function is good but a change in its signature affects its usage in every place.
+* Always use interfaces to decouple usage from declaration
+* Common ways to introduce abstractions:
+    * Extracting constant
+    * Wrapping behavior into a function
+    * Wrapping function into a class
+    * Hiding a class behind an interface
+    * Wrapping universal objects into specialist
+    * Using generic type parameters
+    * Extracting inner classes
+    * Restricting creation, for instance by forcing object creation via factory method
+* Too many abstractions brings too much complexity. One may use the abstraction expecting certain behavior, when it was actually changed.
+* Factors to consider when introducing abstractions:
+    * Team size
+    * Team experience
+    * Project size
+    * Feature set
+    * Domain knowledge
+* Suggestion: In bigger projects with more developers, it is much harder to change object creation and usage later, so we prefer more abstract solutions.
+
+Item 25: Specify API stability
+* Use SemVer
+* Use Experimental meta-annotation
+* Use Deprecated annotation
+* Use ReplaceWith annotation to suggest a newer version of a method
+* Changes in an API should follow a long process of deprecating
+
+Item 26: Consider wrapping external APIs
+* Not afraid of API contract changing since we only have a single place to change
+* Adjust the API to our project style and logic
+* Replaceable
+
+Item 27: Minimize elements visibility
+* Keep an API as lean as possible
+    * Easier to learn and maintain
+    * When making changes it is easier to expose something than to hide it
+    * A class cannot be responsible for its own state when some properties can be changed from outside
+* Protecting internal object state is important when we have variable depending on each other
+* Elements visibility should be as restrictive as possible. There is no need to apply this to DTO.
+
+Item 28: Define contract with documentation
+* When we define an element, especially parts of external API, we should define a contract. We do that through documentation, comments, and examples.
+
+Item 29: Respect abstraction contracts
+* If you want your programs to be stable, respect contracts.
+* If you are forced to break them, document this fact well
+Object creation
+
+Item 30: Consider factory functions instead of constructors
+* They solve the confusion of having multiple constructors with different parameters. Ex: ArrayList(3) vs ArrayList.withSize(3)
+* Can return any type of their subtypes
+* We can include a caching mechanism and avoid creating a new object every time (Singleton). Or return null when an object could not be created (Transient errors) with a method named Connection.createOrNull()
+* They can be inlined and their type parameters can be reified
+* They CANNOT be used in subclass construction since we need to call the superclass constructor
+* They are not a competitor of the primary constructor, they are a competitor of the secondary constructor instead.
+* Ways to create a factory function:
+    * Companion Object Factory Function
+        * Ex: Date.from("2019-01-20"). Receives a single parameter and returns a corresponding interface of the same type
+        * val enum: Set<String> = EnumSet.of("1", "2"). Takes multiple parameters and returns a type of the provided arguments
+        * val prime: BigInteger = BigInteger.valueOf(Integer.MAX_VALUE) is an alternative to 'from' and 'of'
+        * val luke: StackWalker = StackWalker.getInstance(options). Used in singleton. Returns always the same instance when the scenario is the same
+        * val newArray = Array.newInstance(classObject, arrayLen). Each call returns a new instance
+        * val fs: FileStore = Files.getFileStore(path). Like getInstance, but used if the factory function is in a different class
+        * val br: BufferedReader = Files.newBufferedReader(path). Like newInstance, but used if the factory function is in a different class
+    * Extension factory functions
+        * This lets us extend external libraries with our own factory methods. But the class/interface we're extending must have at least an empty companion object
+    * Top level functions
+        * Good call for small and commonly created objects. Having a method lisfOf(1,2,3) is simpler and more readable than List.of(1,2,3). So we need a companion object with a function. But be careful since they are available everywhere. Choose names wisely so the top level functions do not get confused with class methods
+    * Fake constructors (top level factory functions that act like a constructor)
+        * Ex: List, MutableList
+        * Use this to have a constructor for an Interface
+        * To have reified type arguments
+* Factory classes have the ability to hold state, and can speed up object creation by caching or duplicating previous objects.
+
+Item 31: Consider a primary constructor with named optional arguments
+* No need of telescoping constructor pattern (constructor overload) or builder pattern since we have named arguments and default values
+* Use a primary constructor with default arguments or an expressive DSL for objects creation
+
+Item 32: Consider defining a DSL for complex object creation
+* DSLs are also often used to define data or configurations (grade)
+* Function type is (a type that represents) an object that can be used as a function. Ex: () -> Unit. (Int) -> Unit.
+    * valplus1:(Int,Int)->Int={a,b->a+b}
+    * valplus1={a:Int,b:Int->a+b}
+    * valmyPlus:Int.(Int)->Int={this+it}
+* Function type with a receiver is the type of an extension function
+    * Similar to a normal function type, but it additionally specifies the receiver type before its arguments and they are separated using a dot
+    * You should consider using DSL when you see repeatable boilerplate code48 and there are no simpler Kotlin features that can help
+
+Item 33: Prefer composition over inheritance
+* inheritance is a great tool to represent the hierarchy of objects, but not necessarily to just reuse some common parts. For such cases, the composition is better because we can choose what behavior do we need.
+* When we need both inheritance (in an ‘is-a’ relationship) but we also want a composition with the same interface we use the Delegation Pattern. The delegation pattern is when our class implements an interface, composes an object that implements the same interface, and forwards methods defined in the interface to this composed object. Such methods are called forwarding methods
+* Composition is more secure - We do not depend on how a class is implemented, but only on its externally observable behavior
+* Composition is more flexible - We can only extend a single class, while we can compose many
+* Composition is more explicit  - Inheritance hides the origin of methods and attributes beside its hierarchy tree.
+* Composition is more demanding - We need to use composed object explicitly. When we add some functionalities to a superclass we often do not need to modify subclasses. When we use composition we more often need to adjust usages.
+*  we should use inheritance when there is a definite “is a” relationship. Not only linguistically, but meaning that every class that inherits from a superclass needs to “be” its superclass.
+
+Item 34: Use the data modifier to represent a bundle of data
+* Do not use Pair or Triple
+
+Item 35: Use function types instead of interfaces to pass operations and actions
+* Interfaces with a single method are called SAM (Single Abstraction Method)
+
+Item 36: Prefer class hierarchies to tagged classes (review)
+* Classes with a constant “mode” that specifies how the class should behave. We call such classes tagged as they contain a tag that specifies their mode of operation (this should be replaced by a sealed class so each behavior is bounded within a limited context)
+
+Item 37: Respect the contract of equals
+* Types of equality: Structural (==) and Referential (===)
+* Data class#copy does not replicate atributes not declared in the primary constructor
+* Equals implementation requirements
+    * Reflexive: for any non-null value x, x.equals(x) should return true.
+    * Symmetric: for any non-null values x and y, x.equals(y) should return true if and only if y.equals(x) returns true.
+    * Transitive: for any non-null values x, y, and z, if x.equals(y) returns true and y.equals(z) returns true, then x.equals(z) should  return true.
+    * Consistent:for any non-null values x and y, multiple invocations of x.equals(y) consistently return true or consistently return false, provided no information used in equals comparisons on the objects is modified.
+    * Never equal to null: for any non-null value x, x.equals(null) should return false.
+
+Item 38: Respect the contract of hashCode
+* Read about hashtables
+* Dot not use mutability on data structures based on hashes or any other DS that organizes elements based on their properties.
+* When you do not have a custom equals method, do not define a custom hashCode
+* Overritten hashCode should always be consistent with equals
+
+Item 39: Respect the contract of compareTo
+* Properties:
+    * Antisymmetric, meaning that if a >= b and b >= a then a == b. Therefore there is a relation between comparison and equality and they need to be consistent with each other.
+    * Transitive, meaning that if a >= b and b >= c then a >= c. Similarly when a > b and b > c then a > c. This property is important because without it, sorting of elements might take literally forever in some sorting algorithms.
+    * Connex, meaning that there must be a relationship between every two ele- ments. So either a >= b, or b >= a. In Kotlin, it is guaranteed by typing system for compareTo because it returns Int, and every Int is either positive, negative or zero. This property is important because if there is no relationship between two elements, we cannot use classic sorting algorithms like quicksort or insertion sort. Instead, we need to use one of the special algorithms for partial orders, like topological sorting.
+* Comparisons should return:
+* 0 if the receiver and other are equal
+* a positive number if the receiver is greater than other
+* a negative number if the receiver is smaller than other
+
+Item 40: Consider extracting non-essential parts of your API into extensions
+* Extensions need to be imported
+* Extensions are not virtual
+* Member has a higher priority
+* Extensions are on a type, not on a class
+* Extensions are not listed in the class reference
+* Extensions give us more freedom and flexibility. They are more noncommittal. Although they do not support inheritance, annotation  processing, and it might be confusing that they are not present in the class. Essential parts of our API should rather stay as members
+
+Item 41: Avoid member extensions
+* Especially, do not define extension as members just to restrict visibility.
+* You should restrict the extension visibility using a visibility modifier and not by placing it locally.
+* When we expect an extension to modify or reference a receiver, it is not clear if we modify the extension or dispatch receiver (the class in which the extension is defined)
+
+Part 3: Efficiency
+
+Item 42: Avoid unnecessary object creation
+* `Nothing` is a subtype of every type
+* mutable objects should not be cached
+* Soft vs Weak reference
+    * Weak references do not prevent Garbage Collector from cleaning-up the value. So once no other reference (variable) is using it, the value will be cleaned.
+    * Soft references are not guaranteeing that the value won’t be cleaned up by the GC either, but in most JVM implementations, this value won’t be cleaned unless memory is needed. Soft references are perfect when we implement a cache.
+* Caching is always a tradeoff: performance for memory.
+* Wrap primitive types when a nullable type or a generic is needed
+
+Item 43: Use inline modifier for functions with parameters of functional types
+* Advantages of 'inline' modifier:
+    * A type argument can be reified
+    * Functions with functional parameters are faster when they are inline
+    * Non-local return is allowed
+* Functions with functional parameters are faster when they are inlined
+* in most cases we don’t know how functions with parameters of functional types will be used, when we define a utility function with such parameters, for instance for collection processing, it is good practice to make it inline
+* Inline functions cannot be recursive
+* Inline functions cannot use elements with more restrictive visibility. We cannotuse private or internal functions or properties in a public inline function
+* There are cases when we want to inline a function, but for some reason, we cannot inline all function type arguments. In such cases we can use the following modifiers:
+    * crossinline - it means that the function should be inlined but non-local return is not allowed. We use it when this function is used in another scope where nonlocal return is not allowed, for instance in another lambda that is not inlined.
+    * noinline - it means that this argument should not be inlined at all. It is used mainly when we use this function as an argument to another function that is not inlined.
+* The main cases where we use inline functions are:
+    * Very often used functions, like print.
+    * Functions that need to have a reified type passed as a type argument, like filterIsInstance.
+    * When we define top-level functions with parameters of functional types. Especially helper functions, like collection processing functions (like map, filter, flatMap, joinToString), scope functions (like also, apply, let), or top-level utility functions (like repeat, run, with).
+
+Item 44: Consider using inline classes
+* Objects holding a single value can be replaced with this value
+* We can use inline classes to make a wrapper around some type
+* Two especially popular uses of inline classes are:
+    * To indicate a unit of measure
+    * To use types to protect user from misuse
+* When we present inline classes through an interface, such classes are not inlined
+* Typealias
+    *  
+    * typealias lets us create another name for a type
+    * it is popular practice to name repeatable function types
+    * typealiases do not protect us in any way from type misuse. They are just adding a new name for a type
+    * If you use a type with unclear meaning, especially a type that might have different units of measure, consider wrapping it with inline classes.
+
+Item 45: Eliminate obsolete object references
+* Forgetting about memory management altogether leads to memory leaks - unnecessary memory consumption - and in some cases to OutOfMemoryError
+* The single most important rule is that we should not keep a reference to an object that is not useful anymore. Especially if such an object is big in terms of memory or if there might be a lot of instances of such objects.
+* Manage dependencies properly instead of storing them statically
+* When we hold state, we should have memory management in our minds.
+*  Generally, readable code will also be doing fairly well in terms of performance or memory. Unreadable code is more likely to hide memory leaks or wasted CPU power. Though sometimes those two values stand in opposition and then, in most cases, readability is more important. When we develop a library, performance and memory are often more important.
+* heap profiler for memory leaks analysis
+* The most important way to avoid cluttering our memory is having variables defined in a local scope and not storing possibly heavy data in top-level properties or object declarations (including companion objects)
+
+Chapter 8: Efficient collection processing
+
+Item 46: Prefer Sequence for big collections with more than one processing step
+* Sequences are lazy, so intermediate functions for Sequence processing don’t do any calculations. Instead, they return a new Sequence that decorates the previous one with the new operation. All these computations are evaluated during a terminal operation like toList or count. Iterable processing, on the other hand, returns a collection like List on every step
+* Sequence processing functions are not invoked until the terminal operation (operation that returns something else but Sequence). For instance, for Sequence, filter is an intermediate operation, so it doesn’t do any calculations, but instead, it decorates the sequence with the new processing step. Calculations are done in a terminal operation like toList
+* There are a few important advantages of the fact that sequences are lazy in Kotlin:
+    * They keep the natural order of operations
+        * In sequence processing, we take the first element and apply all the operations, then we take the next element, and so on. We will call it element-by-element or lazy order. In iterable processing, we take the first operation and we apply it to the whole collection, then when move to the next operation, etc.. We will call it step-by-step or eager order
+    * They do a minimal number of operations
+        * when we have some intermediate processing steps and our terminal operation does not necessarily need to iterate over all elements, using a sequence will most likely be better for the performance of your processing. Examples of such operations are first, find, take, any, all, none or indexOf
+    * They can be infinite
+        * we generally either limit the number of elements by take, or we ask for just the first element using first
+    * They do not need to create collections at every step
+        *  prefer to use Sequence for big collections with more than one processing step
+        * in a typical collection processing with more than one step, for at least a couple of thousands of elements, we can expect around a 20-40% performance improvement
+* There are some operations where we don’t profit from this sequence usage because we have to operate on the whole collection either way. sorted is an example
+* Use Java streams rarely, only for computationally heavy processing where you can profit from the parallel mode. Otherwise, use Kotlin stdlib functions to have a homogeneous and clean code that can be used in different platforms or on common modules
+* Plugin to debug sequences:
+    * Kotlin Sequence Debugger
+    * Java Stream Debugger
+
+Item 47: Limit the number of operations
+* For standard collection processing, it is most often another iteration over elements and additional collection created under the hood. For sequence processing, it is another object wrapping the whole sequence, and another object to keep operation
+
+Item 48: Consider Arrays with primitives for performance-critical processing
+*  Primitives are lighter, as every object adds additional weight
+* Faster, as accessing the value through accessors is an additional cost
+* For a 1M int values, a IntArray allocates 400 000 016 bytes, while a List<Int> allocates s 2 000 006 944 bytes. It is 5 times more.
+    * When calculating an average, the processing over primitives is around 25% faster.
+
+Item 49: Consider using mutable collections
+* The biggest advantage of using mutable collections instead of immutable is that they are faster in terms of performance
+* Adding all elements from a previous collection is a costly process when we deal with bigger collections. This is why using mutable collections, especially if we need to add elements, is a performance optimization.
+* Although notice that those arguments rarely apply to local variables where synchronisation or encapsulation is rarely needed. This is why for local processing, it generally makes more sense to use mutable collections
+
 ---
 
 ## Avaliando os testes
