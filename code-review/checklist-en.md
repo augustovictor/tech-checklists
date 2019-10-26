@@ -231,17 +231,18 @@ O que considerar:
 - [ ] Comportamentos óbvios não estão implementados. Não devemos ser surpreendidos por uma função não executar um comportamento óbvio.
 - [ ] Comportamento errado nos edge cases. Não confie na sua intuição. Teste todos os edge cases.
 - [ ] Overridden safeties
-- [ ] Duplication. Find and eliminate duplication wherever you can
-- [ ] Vertical separation
-- [ ] Inconsistency. If you do something a certain way, do all similar things in the same way. This goes back to the principle of least surprise.
+- [ ] Encontre e remova duplicações de código ou lógica;
+- [ ] Separação vertical (PBF ao invés de PBL)
+- [ ] Inconsistência. Se algo é feito de uma forma, faça todas as outras da mesma forma. Principle of least surprise;
 - [ ] Adote Structure over Convention;
-- [ ] Enforce design decisions with structure over convention. Naming conventions are good, but they are inferior to structures that force compliance. For example, switch/cases with nicely named enumerations are inferior to base classes with abstract methods. No one is forced to implement the switch/case statement the same way each time; but the base classes do enforce that concrete classes have all abstract methods implemented.
+- [ ] Garanta decisões de design através de estrutura ao invés de convenção. Convenções de nomenclatura são boas, mas são inferiores a estruturas, que forçam conformidade.
+  - Ex: `switch cases` com `enums` são inferiores a classes base com métodos abstratos, pois não somos forçados a implementar um novo fluxo em um `switch case` da mesma forma sempre; mas classes base com métodos abstratos nos forçam a implementar os métodos nas classes filhas;
 - [ ] Encapsule condicionais;
-- [ ] Don’t Be Arbitrary. Have a reason for the way you structure your code, and make sure that reason is communicated by the structure of the code
+- [ ] Não seja arbitrário nas decisões, tenha um motivo para justificar a forma como você estrutur aseu código, e faça com que esse motivo seja comunicado pela estrutura do código;
 ### Names
-- [ ] Choose Names at the Appropriate Level of Abstraction. Don’t pick names that communicate implementation; choose names the reflect the level of abstraction of the class or function you are working in.
+- [ ] Escolha nomes de acordo com o nível de abstração apropriado. Não escolha nomes que expressam implementação, escolha nomes que refletem o nível de abstração da classe ou função;
 - [ ] Use nomes longos para escopos longos de código;
-- [ ] Nomes devem deixar de forma explícita. Ex: getFormattedValueOrEmpty
+- [ ] Nomes devem deixar de forma explícita. Ex: `getFormattedValueOrEmpty`
 ### Tests
 - [ ] Use alguma ferramenta de code coverage
 - [ ] Não deixe de implementar testes triviais
