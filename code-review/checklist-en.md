@@ -32,6 +32,28 @@ O que considerar:
 ---
 
 ## Analizando a qualidade do código e o design de classes
+
+Smells na estrutura da aplicação:
+* Rigidez
+    * É a tendência de um software de resistir à mudanças. Quando mudamos algo, temos que mexer em muitos outros módulos.
+    * Esse smell nos faz não saber quando uma mudança terá fim, e acabamos por ouvir mais "foi mais complexo do que imaginávamos".
+    * Mudanças não críticas no sistema acabam sendo esquecidas para evitar esse tipo de problema.
+* Fragilidade
+    * Mudanças na aplicação quebram muitas partes que não são relacionadas conceitualmente com a parte alterada. Isso torna o processo de manunteção muito custoso e complexo.
+* Imobilidade
+    * Partes do software que poderiam ser reutilizadas em outras partes da aplicação, ou extraídas para uso em outra aplicação, estão tão acopladas ao código que o esforço de reescrever é menor do que separar extrair o módulo.
+* Viscosidade
+    * É mais fácil implementar a forma errada do que a forma certa. É difícil preservar o projeto de classes.
+* Complexidade desnecessária
+    * Uma complexidade trazida por BDUF ao invés de uma abordagem iterativa e incremental (arquitetura emergente), quando o projeto de classes é flexível ou sofisticado demais.
+    * Uma nova pessoa no time não deve gastar muito tempo para aprender o projeto de classes para conseguir estende-lo ou mante-lo de forma confortável.
+* Repetição desnecessária
+    * Quando há código repetido é sinal de que alguma abstração não foi capturada de forma correta no projeto de classes.
+    * Acarreta mudanças em diferentes pontos do código quando há alguma alteração. E isso demanda o entendimento se há alguma peculiaridade nas diferentes ocorrências do código duplicado.
+* Opacidade
+    * É um módulo difícil de ser entendido.
+    * A tendência de qualquer código é se tornar opaco com o tempo, e para isso deve haver um constante trabalho se colocar no lugar do leitor e refatorar o código de forma a deixa-lo claro.
+    
 <details>
   <summary>Meaningful names</summary>
   
@@ -288,5 +310,22 @@ O que considerar:
 ---
 
 ## Avaliando os testes
+
+### Estrutura dos testes
+
+* Se um método tem testes demais, é um sinal que ele possui muitos comportamentos e tendem a alterar muitos atributos da classe.
+* Se uma classe possui testes demais, é um sinal que ela possui muitas responsabilidades. Classes que possuem muitos métodos públicos tendem a ter muitas responsabilidades.
+* A necessidade de criar cenários de testes muito grandes para uma classe nos leva a entender que essa classe lidam com muitos objetos
+* Querer testar métodos privados é um indício de que o método poderia estar em outra classe
+* Um teste de classe que tem muitos mocks indica que a classe testada é instável pois depende de muitas classes
+* Para 'get' de informações podemos ignorar a lei de demeter, mas para usar commands é bom encapsular.
+
+Testes de integração
+* Faça uso de mocks quando usar a instância real for complexo ou trabalhoso. Caso não seja, faça uso do objeto real
+
+O TDD faz sentido quando queremos testar classes complexas ou algorítmos. Quando estamos falando de código de infraestrutura, normalmente é um comportamento padrão, em que a forma de escrever a classe não irá mudar dependendo do TDD.
+
+Ao praticar o TDD, criamos interfaces que representam a interação com o sistema, e não workarounds para resolver um problema. Pratique o TDD quando houver a necessidade de feedback constante.
+
 
 ### Regras de negócio (happy path X edge cases)
