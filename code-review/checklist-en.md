@@ -83,7 +83,7 @@ O que considerar:
   - [ ] Se uma função precisa alterar o estado de algo, que seja do próprio objeto que está a invocando;
   - [ ] Não devemos ter que ler a assinatura de uma função para entender o que ela faz. O próprio nome deve deixar isso descrito;
   - [ ] Command Query Separation: Funções devem executar algo OU retornar algo. Não os dois;
-    - Say we have a function to set a value to an attribute and return true if it succeeds. In our program it would be wrapped in an if condition. However we would not tell whether we’re checking the attribute was previously set then we do something (work as an adjective). Or if we can assign a value successfully (work as a verb). A solution to that is to separate the verification(Query) from the assignment(Command). And wrap the command inside an if statement verifying the Query in our program.
+    - Imagine que temos uma função que atribui um valor a uma propriedade e retorna `true` caso ocorra com sucesso. Na aplicação isso estaria dentro de um `if`, porém não seria possível dizer se a propriedade já estava definida com um valor e então estamos atribuindo um novo valor(adjetivo; ou se o valor foi atribuido com sucesso(verbo). Ex: `if (obj.assignNewValue('newValue')) { ... }`. A solução é separar a verificação (query) da atribuição (command). Ex: `if (obj.hasNewValue('newValue')) { obj.assignNewValue('newValue' }`;
   - [ ] É melhor lançar `exceptions` do que retornar códigos de erro. Ao retornar um código de erro nós obrigamos o client a tratar o erro imediatamente (programação defensiva);
     - Ao fazer uso de exceptions podemos fazer um wrap na classe client da nossa função, e separar a execução do cenário esperado do momento de tratamento de erro;
   - [ ] Extraia para funções o conteúdo de tryCatch blocks;
@@ -228,8 +228,8 @@ O que considerar:
   <summary>Tips</summary>
 
   ### General
-- [ ] Obvious Behavior Is Unimplemented. We should not be surprised by the function for not doing expected operations
-- [ ] Incorrect behavior on edge cases. Don’t rely on your intuition. Look for every boundary condition and write a test for it
+- [ ] Comportamentos óbvios não estão implementados. Não devemos ser surpreendidos por uma função não executar um comportamento óbvio.
+- [ ] Comportamento errado nos edge cases. Não confie na sua intuição. Teste todos os edge cases.
 - [ ] Overridden safeties
 - [ ] Duplication. Find and eliminate duplication wherever you can
 - [ ] Vertical separation
