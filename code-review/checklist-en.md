@@ -420,7 +420,8 @@ O que considerar:
 
 ## Avaliando o uso do Kotlin
 
-Definitions
+### Definitions
+
 * A method is a function associated with a class
     * A function can be:
         * At top-level (top-level functions)
@@ -432,33 +433,37 @@ Definitions
 * The parameter is a variable defined in a function declaration. The argument is the actual value of this variable that gets passed to the function
 * secondary constructor - constructor that calls the primary constructor using 'this' keyword
 
+---
 
-Safety
-Item 1: Limit mutability
-* A class with many mutating points that depend on each other is often really hard to understand and to modify.
-* It requires proper synchronization in multithreaded programs
-Item 2: Minimize the scope of variables
-Item 3: Eliminate platform types as soon as possible. These are types provided by another programming language
-Item 4: Do not expose inferred types. If we assign an inferred type to a generic class, it will have the exact instance type.
-Item 5: [Specify your expectations on arguments and state](https://gist.github.com/augustovictor/5d2befc9a9782ff5253620bb3eb63e73)
-Item 6: Prefer standard errors to custom ones
-Item 7: Prefer null or Failure result when the lack of result is possible
-Item 8: Handle nulls properly
-* ‘also' and ‘let’ are a better choice for additional operations or handling nullable values
-Item 9: Close resources with use
-Item 10: Write unit tests
-Item 11: Design for readability (Reduce cognitive load)
-Item 12: Operator meaning should be consistent with its function name. Use infix, a function with explicit name, or a top level  function
-Item 13: Avoid returning or operating on `Unit?` The only case the author identified was to use Elvis operator or safe call.
-Item 14: Specify the variable type when it is not clear
-Item 15: Consider referencing receivers explicitly
-Item 16: Properties should represent state, not behavior
+### Safety
+
+* Item 1: Limit mutability
+    * A class with many mutating points that depend on each other is often really hard to understand and to modify.
+    * It requires proper synchronization in multithreaded programs
+
+* Item 2: Minimize the scope of variables
+* Item 3: Eliminate platform types as soon as possible. These are types provided by another programming language
+* Item 4: Do not expose inferred types. If we assign an inferred type to a generic class, it will have the exact instance type.
+* Item 5: [Specify your expectations on arguments and state](https://gist.github.com/augustovictor/5d2befc9a9782ff5253620bb3eb63e73)
+* Item 6: Prefer standard errors to custom ones
+* Item 7: Prefer null or Failure result when the lack of result is possible
+* Item 8: Handle nulls properly
+    * ‘also' and ‘let’ are a better choice for additional operations or handling nullable values
+* Item 9: Close resources with use
+* Item 10: Write unit tests
+* Item 11: Design for readability (Reduce cognitive load)
+* Item 12: Operator meaning should be consistent with its function name. Use infix, a function with explicit name, or a top level  function
+* Item 13: Avoid returning or operating on `Unit?` The only case the author identified was to use Elvis operator or safe call.
+* Item 14: Specify the variable type when it is not clear
+* Item 15: Consider referencing receivers explicitly
+* Item 16: Properties should represent state, not behavior
 * Kotlin properties != java fields
-* 
-Item 17: Consider naming arguments
+* Item 17: Consider naming arguments
 
-Code design
-Reusability
+### Code design
+
+### Reusability
+
 Item 19: Do not repeat knowledge
 * Logic knowledge - How a program behaves and what it looks like
 * Common algorithms - Implementation of algorithms to achieve expected behavior
